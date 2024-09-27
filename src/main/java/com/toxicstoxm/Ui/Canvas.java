@@ -50,7 +50,9 @@ public class Canvas extends JPanel {
         g2d.setBackground(Color.BLACK);
         g2d.clearRect(0, 0, getWidth(), getHeight());
 
-        for (Component component: componentList)
+        List<Component> cached_components = new ArrayList<>(componentList);
+
+        for (Component component : cached_components)
         {
             g2d.setColor( component.color );
             g2d.fill( component.shape );
