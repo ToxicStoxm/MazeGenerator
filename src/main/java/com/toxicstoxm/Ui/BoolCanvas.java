@@ -15,27 +15,31 @@ public class BoolCanvas extends JPanel {
         setOpaque(true);
         board = new boolean[height][width];
         currentState = new boolean[height][width];
+        setIgnoreRepaint(true);
     }
 
-    public Boolean get(int x, int y) {
-        return board[y][x];
+    public Boolean get(Point point) {
+        return board[point.y][point.x];
     }
 
-    public void enable(int x, int y) {
-        board[y][x] = true;
+    public void enable(Point point) {
+        board[point.y][point.x] = true;
     }
 
-    public void disable(int x, int y) {
-        board[y][x] = false;
+    public void disable(Point point) {
+        board[point.y][point.x] = false;
     }
 
-
-    public void set(int x, int y, Boolean value) {
-        board[y][x] = value;
+    public void set(Point point, Boolean value) {
+        board[point.y][point.x] = value;
     }
+
+    public boolean repaint = true;
+
 
     @Override
     protected void paintComponent(Graphics g) {
+        if (!repaint) return;
         Graphics2D g2d = (Graphics2D) g.create();
 
         for (int y = 0; y < board.length; y++) {

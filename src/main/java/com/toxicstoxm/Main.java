@@ -7,10 +7,10 @@ import com.toxicstoxm.Ui.Window;
 
 public class Main {
 
-    public static final int width = 1920;
-    public static final int height = 1080;
+    public static final int width = 2560;
+    public static final int height = 1440;
 
-    public static final int scale = 15;
+    public static final int scale = 1;
 
     public static final int scaled_width = width / scale;
     public static final int scaled_height = height / scale;
