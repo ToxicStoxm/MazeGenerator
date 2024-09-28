@@ -1,6 +1,7 @@
 package com.toxicstoxm.MazeGen;
 
 import com.toxicstoxm.Main;
+import com.toxicstoxm.MazeSolve.Dijkstra;
 import com.toxicstoxm.Ui.BoolCanvas;
 import com.toxicstoxm.Ui.Window;
 
@@ -28,8 +29,8 @@ public class MazeGen {
 
         directions = new ArrayList<>();
 
-        final int plus = 1;
-        final int minus = -1;
+        final int plus = Main.scale;
+        final int minus = -1 * Main.scale;
 
         directions.add(new Direction() {
 
@@ -190,10 +191,28 @@ public class MazeGen {
             for (int iterX = 0; iterX < Main.scaled_width; iterX++) {
                 genPath(iterX, iterY, 0);
                 //canvas.repaint();
+                canvas.repaint = true;
+                canvas.repaint();
+                canvas.repaint = false;
             }
         }
         canvas.repaint = true;
         canvas.repaint();
+
+        Dijkstra dijkstra = new Dijkstra();
+
+        //dijkstra.dijkstra(boolBoardToIntBoard(canvas.board), 1);
+
+    }
+
+    private int[][] boolBoardToIntBoard(boolean[][] boolBoard) {
+        int[][] result = new int[boolBoard.length][boolBoard[0].length];
+        for (int y = 0; y < boolBoard.length; y++) {
+            for (int x = 0; x < boolBoard[y].length; x++) {
+                result[y][x] = boolBoard[y][x] ? 1 : 0;
+            }
+        }
+        return result;
     }
 
     record Result(boolean success, int x, int y) {}
@@ -229,7 +248,7 @@ public class MazeGen {
                 log("Path pos: x = " + pathX + " y = " + pathY);
                 result = genPathSegment(pathX, pathY);
                 log("Result: success = " + result.success + " x = " + result.x + " y = " + result.y);
-                //log("Repainting...");
+                log("Repainting...");
 
                 pathX = result.x;
                 pathY = result.y;

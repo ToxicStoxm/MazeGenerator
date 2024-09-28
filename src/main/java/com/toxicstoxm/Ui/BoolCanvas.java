@@ -7,9 +7,9 @@ import java.awt.*;
 
 public class BoolCanvas extends JPanel {
 
-    boolean[][] board;
+    public boolean[][] board;
 
-    boolean[][] currentState;
+    public boolean[][] currentState;
 
     public BoolCanvas(int width, int height) {
         setOpaque(true);
